@@ -8,7 +8,7 @@ function App() {
       flexDirection: 'column',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <h1>Hello world</h1>
+      <h1>Hello</h1>
       <p>OCR App project started</p>
     </div>
   )
