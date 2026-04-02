@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   getHistory,
   deleteFromHistory,
@@ -15,28 +15,24 @@ interface HistoryPanelProps {
 }
 
 export const HistoryPanel: React.FC<HistoryPanelProps> = ({ onSelectEntry, refreshTrigger }) => {
-  const [entries, setEntries] = useState<HistoryEntry[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
+  const [localTick, setLocalTick] = useState(0);
 
-  const loadHistory = useCallback(() => {
-    const data = searchQuery ? searchHistory(searchQuery) : getHistory();
-    setEntries(data);
-  }, [searchQuery]);
-
-  useEffect(() => {
-    loadHistory();
-  }, [loadHistory, refreshTrigger]);
+  const entries = useMemo(() => {
+    return searchQuery ? searchHistory(searchQuery) : getHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchQuery, refreshTrigger, localTick]);
 
   const handleDelete = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     deleteFromHistory(id);
-    loadHistory();
+    setLocalTick((t) => t + 1);
   };
 
   const handleClear = () => {
     clearHistory();
-    setEntries([]);
+    setLocalTick((t) => t + 1);
   };
 
   if (!isExpanded) {

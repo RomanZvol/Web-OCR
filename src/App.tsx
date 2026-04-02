@@ -197,6 +197,24 @@ function App() {
 
       <footer style={{ marginTop: '4rem', color: 'var(--text-muted)', fontSize: '0.85rem', textAlign: 'center' }}>
         <p>© 2026 VisionOCR Studio • Powered by Tesseract.js</p>
+        <div style={{ marginTop: '0.5rem', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}>
+          <span style={{
+            display: 'inline-block',
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            background: import.meta.env.VITE_APP_STATUS === 'production' ? '#22c55e' : '#f59e0b',
+          }} />
+          <span style={{
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            letterSpacing: '0.05em',
+            textTransform: 'uppercase',
+            color: import.meta.env.VITE_APP_STATUS === 'production' ? '#22c55e' : '#f59e0b',
+          }}>
+            {import.meta.env.VITE_APP_STATUS ?? 'unknown'}
+          </span>
+        </div>
       </footer>
     </div>
   );
