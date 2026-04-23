@@ -1,3 +1,5 @@
+[![CI/CD Pipeline](https://github.com/RomanZvol/Web-OCR/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/RomanZvol/Web-OCR/actions/workflows/ci-cd.yml)
+
 # Web-OCR
 
 Зручний додаток для OCR (зчитування тексту з фото).
