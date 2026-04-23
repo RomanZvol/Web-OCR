@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+# Тригери для запуску пайплайну
+on:
+  # Запуск при push у гілки main та develop
+  push:
+    branches:
+      - main
+      - develop
+  # Запуск при створенні Pull Request
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  # Job для збірки та тестування
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Крок 1: Отримання коду з репозиторію
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Крок 2: Налаштування Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Крок 3: Встановлення залежностей
+      - name: Install dependencies
+        run: npm ci
+
+      # Крок 4: Лінтинг коду
+      - name: Run linter
+        run: npm run lint
+
+      # Крок 5: Запуск тестів
+      - name: Run tests
+        run: npm run test
+
+      # Крок 6: Збірка проєкту
+      - name: Build project
+        run: npm run build
