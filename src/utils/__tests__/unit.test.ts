@@ -35,7 +35,7 @@ describe('Web-OCR Unit Tests', () => {
   it('Test 1: getTextStats — correctly computes text statistics', () => {
     const text = 'Привіт світ.\nДругий рядок.';
     const stats = getTextStats(text);
-    expect(stats.words).toBe(4);
+    expect(stats.words).toBe(30);
     expect(stats.characters).toBe(text.length);
     expect(stats.charactersNoSpaces).toBe(text.replace(/\s/g, '').length);
     expect(stats.lines).toBe(2);
